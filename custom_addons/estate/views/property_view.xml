@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+
+        <!-- Define the Parent Menu -->
+        <menuitem id="menu_estate" name="Estate" sequence="5"/>
+
+        <!-- Action for Tree View -->
+        <record id="action_estate_property_tree" model="ir.actions.act_window">
+            <field name="name">Estate Property Tree View</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Action for Form View -->
+        <record id="action_estate_property_form" model="ir.actions.act_window">
+            <field name="name">Estate Property Form View</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <!-- Menu for the Estate Property -->
+        <menuitem id="menu_estate_property" name="Estate Property" sequence="10" parent="menu_estate"/>
+
+        <!-- Menu items linking to the actions -->
+        <menuitem id="menu_estate_property_tree" name="Property Tree View" parent="menu_estate_property" action="action_estate_property_tree"/>
+        <menuitem id="menu_estate_property_form" name="Property Form View" parent="menu_estate_property" action="action_estate_property_form"/>
+
+        <!-- Tree View -->
+        <record id="view_tree_property" model="ir.ui.view">
+            <field name="name">estate.property.tree</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="postcode"/>
+                    <field name="date_availability"/>
+                    <field name="expected_price"/>
+                    <field name="selling_price"/>
+                    <field name="bedrooms"/>
+                    <field name="living_area"/>
+                    <field name="facades"/>
+                    <field name="garage"/>
+                    <field name="garden"/>
+                    <field name="garden_area"/>
+                    <field name="garden_orientation"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_form_property" model="ir.ui.view">
+            <field name="name">estate.property.form</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="postcode"/>
+                        <field name="date_availability"/>
+                        <field name="expected_price"/>
+                        <field name="selling_price"/>
+                        <field name="bedrooms"/>
+                        <field name="living_area"/>
+                        <field name="facades"/>
+                        <field name="garage"/>
+                        <field name="garden"/>
+                        <field name="garden_area"/>
+                        <field name="garden_orientation"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
