@@ -9,6 +9,7 @@
     """,
     'data': [
         'security/ir.model.access.csv',
+        'views/property_view.xml',
 
     ],
     'demo': [
