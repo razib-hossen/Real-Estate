@@ -25,6 +25,23 @@
         <menuitem id="menu_estate_property_tree" name="Property Tree View" parent="menu_estate_property" action="action_estate_property_tree"/>
         <menuitem id="menu_estate_property_form" name="Property Form View" parent="menu_estate_property" action="action_estate_property_form"/>
 
+        <!-- Search View -->
+        <record id="view_search_property" model="ir.ui.view">
+            <field name="name">estate.property.search</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Property Name"/>
+                    <field name="postcode" string="Postcode"/>
+                    <field name="bedrooms" string="Bedrooms"/>
+                    <field name="expected_price" string="Expected price"/>
+                    <field name="selling_price" string="Selling Price"/>
+                    <!-- Add more fields as needed for search -->
+                </search>
+            </field>
+        </record>
+
+
         <!-- Tree View -->
         <record id="view_tree_property" model="ir.ui.view">
             <field name="name">estate.property.tree</field>
