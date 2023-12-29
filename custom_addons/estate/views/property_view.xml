@@ -53,26 +53,34 @@
             <field name="name">estate.property.form</field>
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
-                <form>
-                    <group>
+                <form string="Test">
+                    <sheet>
                         <group>
-                            <field name="name"/>
-                            <field name="description"/>
-                            <field name="postcode"/>
-                            <field name="date_availability"/>
-                            <field name="expected_price"/>
-                            <field name="selling_price"/>
+                            <group>
+                                <field name="name"/>
+                                <field name="postcode"/>
+                                <field name="date_availability"/>
+                            </group>
+                            <group>
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
+                                <field name="living_area"/>
+                            </group>
+                            <notebook>
+                                <page string="Description">
+                                    <group>
+                                        <field name="description"/>
+                                        <field name="bedrooms"/>
+                                        <field name="facades"/>
+                                        <field name="garage"/>
+                                        <field name="garden"/>
+                                        <field name="garden_area"/>
+                                        <field name="garden_orientation"/>
+                                    </group>
+                                </page>
+                            </notebook>
                         </group>
-                        <group>
-                            <field name="bedrooms"/>
-                            <field name="living_area"/>
-                            <field name="facades"/>
-                            <field name="garage"/>
-                            <field name="garden"/>
-                            <field name="garden_area"/>
-                            <field name="garden_orientation"/>
-                        </group>
-                    </group>
+                    </sheet>
                 </form>
             </field>
         </record>
