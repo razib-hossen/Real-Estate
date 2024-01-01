@@ -3,7 +3,7 @@
 
         <!-- Action for Form View -->
         <record id="action_estate_property_type_form" model="ir.actions.act_window">
-            <field name="name">Estate Property Form View</field>
+            <field name="name">Estate Property Type Form View</field>
             <field name="res_model">estate.property.type</field>
             <field name="view_mode">form</field>
         </record>
@@ -12,7 +12,7 @@
         <menuitem id="menu_estate_property_type" name="Settings" sequence="10" parent="menu_estate"/>
 
         <!-- Menu items linking to the actions -->
-        <menuitem id="menu_estate_property_type_form" name="Property Type Form View" parent="menu_estate_property_type" action="action_estate_property_type_form"/>
+        <menuitem id="menu_estate_property_type_form" name="Property Types" parent="menu_estate_property_type" action="action_estate_property_type_form"/>
 
         <!-- Form View -->
         <record id="view_form_property_type" model="ir.ui.view">

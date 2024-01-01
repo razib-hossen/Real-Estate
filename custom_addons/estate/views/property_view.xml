@@ -2,28 +2,27 @@
     <data>
 
         <!-- Define the Parent Menu -->
-        <menuitem id="menu_estate" name="Estate" sequence="5"/>
+        <menuitem id="menu_estate" name="Real Estate" sequence="5" action="action_estate_property_tree"/>
 
         <!-- Action for Tree View -->
         <record id="action_estate_property_tree" model="ir.actions.act_window">
-            <field name="name">Estate Property Tree View</field>
+            <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
             <field name="view_mode">tree,form</field>
         </record>
 
         <!-- Action for Form View -->
         <record id="action_estate_property_form" model="ir.actions.act_window">
-            <field name="name">Estate Property Form View</field>
+            <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
             <field name="view_mode">form</field>
         </record>
 
         <!-- Menu for the Estate Property -->
-        <menuitem id="menu_estate_property" name="Estate Property" sequence="10" parent="menu_estate"/>
+        <menuitem id="menu_estate_property" name="Advertisements" sequence="10" parent="menu_estate"/>
 
         <!-- Menu items linking to the actions -->
-        <menuitem id="menu_estate_property_tree" name="Property Tree View" parent="menu_estate_property" action="action_estate_property_tree"/>
-        <menuitem id="menu_estate_property_form" name="Property Form View" parent="menu_estate_property" action="action_estate_property_form"/>
+        <menuitem id="menu_estate_property_form" name="Properties" parent="menu_estate_property" action="action_estate_property_form"/>
 
         <!-- Search View -->
         <record id="view_search_property" model="ir.ui.view">
