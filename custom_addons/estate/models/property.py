@@ -6,6 +6,7 @@ class Property(models.Model):
 
     name = fields.Char("Title", required=True, translate=True)
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
+    tag_ids = fields.Many2many("estate.property.tag", string="Tags")
     description = fields.Text("Description", )
     postcode = fields.Char("Postcode")
     date_availability = fields.Date("Available From")
