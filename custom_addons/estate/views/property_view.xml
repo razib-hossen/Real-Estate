@@ -20,6 +20,8 @@
 
         <!-- Menu for the Estate Property -->
         <menuitem id="menu_estate_property" name="Advertisements" sequence="10" parent="menu_estate"/>
+        <!-- Menu for the Estate Property -->
+        <menuitem id="menu_estate_property_settings" name="Settings" sequence="10" parent="menu_estate"/>
 
         <!-- Menu items linking to the actions -->
         <menuitem id="menu_estate_property_form" name="Properties" parent="menu_estate_property" action="action_estate_property_form"/>
@@ -74,6 +76,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
+                                <field name="property_type_id"/>
                                 <field name="postcode"/>
                                 <field name="date_availability"/>
                             </group>
@@ -92,6 +95,12 @@
                                         <field name="garden"/>
                                         <field name="garden_area"/>
                                         <field name="garden_orientation"/>
+                                    </group>
+                                </page>
+                                <page string="Other Info">
+                                    <group>
+                                        <field name="salesman_id"/>
+                                        <field name="buyer_id"/>
                                     </group>
                                 </page>
                             </notebook>

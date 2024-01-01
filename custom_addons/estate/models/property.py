@@ -5,6 +5,7 @@ class Property(models.Model):
     _description = "The Real Estate Advertisement module."
 
     name = fields.Char("Title", required=True, translate=True)
+    property_type_id = fields.Many2one('estate.property.type', string='Property Type')
     description = fields.Text("Description", )
     postcode = fields.Char("Postcode")
     date_availability = fields.Date("Available From")
@@ -20,3 +21,5 @@ class Property(models.Model):
         string='Type',
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')],
         help="Type is used to separate Leads and Opportunities")
+    salesman_id = fields.Many2one('res.users', string='Salesman', index=True, default=lambda self: self.env.user)
+    buyer_id = fields.Many2one('res.users', string='Buyer')
