@@ -99,6 +99,11 @@
                                         <field name="garden_orientation"/>
                                     </group>
                                 </page>
+                                <page string="Offer">
+                                    <group>
+                                        <field name="offer_ids"/>
+                                    </group>
+                                </page>
                                 <page string="Other Info">
                                     <group>
                                         <field name="salesman_id"/>

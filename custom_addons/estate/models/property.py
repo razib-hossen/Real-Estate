@@ -24,3 +24,8 @@ class Property(models.Model):
         help="Type is used to separate Leads and Opportunities")
     salesman_id = fields.Many2one('res.users', string='Salesman', index=True, default=lambda self: self.env.user)
     buyer_id = fields.Many2one('res.users', string='Buyer')
+    offer_ids = fields.One2many(
+        'estate.property.offer',
+        'property_id',
+        string='Offers',
+    )

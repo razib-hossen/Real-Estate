@@ -12,6 +12,7 @@
         'views/property_view.xml',
         'views/property_type_view.xml',
         'views/property_tag_view.xml',
+        'views/property_offer_view.xml',
 
     ],
     'demo': [
