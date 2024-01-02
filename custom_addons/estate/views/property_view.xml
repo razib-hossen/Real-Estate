@@ -73,16 +73,21 @@
             <field name="model">estate.property</field>
             <field name="arch" type="xml">
                 <form string="Test">
+                    <header>
+                        <button class="oe_highlight" name="button_sold" type="object" string="SOLD"/>
+                        <button class="oe_highlight" name="button_cancel" type="object" string="CANCEL"/>
+                    </header>
+
                     <sheet>
                         <group>
                             <group>
                                 <field name="name"/>
+                                <field name="state" />
                                 <field name="tag_ids" widget="many2many_tags"/>
                                 <field name="property_type_id"/>
-                                <field name="postcode"/>
                             </group>
                             <group>
-                            <field name="date_availability"/>
+                                <field name="date_availability"/>
                                 <field name="expected_price"/>
                                 <field name="selling_price"/>
                                 <field name="best_offer" />
@@ -91,6 +96,7 @@
                                 <page string="Description">
                                     <group>
                                         <field name="description"/>
+                                        <field name="postcode"/>
                                         <field name="bedrooms"/>
                                         <field name="facades"/>
                                         <field name="garage"/>

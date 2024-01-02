@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
 
 class Property(models.Model):
@@ -32,6 +32,12 @@ class Property(models.Model):
     )
     best_offer = fields.Float("Best Offer", compute="_compute_best_offer", store=True)
     total_area = fields.Integer("Total Area (sqm)", compute="_compute_total_area")
+    state = fields.Selection(
+        string='Status',
+        selection=[('new', 'New'), ('canceled', 'Canceled'), ('sold', 'Sold')],
+        default='new',
+        readonly=True,
+    )
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
@@ -52,3 +58,22 @@ class Property(models.Model):
         else:
             self.garden_area = False
             self.garden_orientation = False
+
+    def action_do_something(self):
+        for record in self:
+            record.name = "Something"
+        return True
+
+
+    def button_cancel(self):
+        for record in self:
+            if record.state == 'sold':
+                raise exceptions.UserError("A sold property cannot be calceled.")
+            record.write({'state': 'canceled'})
+
+
+    def button_sold(self):
+        for record in self:
+            if record.state == 'canceled':
+                raise exceptions.UserError("A canceled property cannot be sold.")
+            record.write({'state': 'solde'})
