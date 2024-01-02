@@ -30,10 +30,15 @@ class Property(models.Model):
         'property_id',
         string='Offers',
     )
-    best_offer = fields.Float("Best Offer")
+    best_offer = fields.Float("Best Offer", compute="_compute_best_offer", store=True)
     total_area = fields.Integer("Total Area (sqm)", compute="_compute_total_area")
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
         for property_record in self:
             property_record.total_area = property_record.living_area + property_record.garden_area
+
+    @api.depends("offer_ids.price")
+    def _compute_best_offer(self):
+        for property_record in self:
+            property_record.best_offer = sum(property_record.offer_ids.mapped("price"))
