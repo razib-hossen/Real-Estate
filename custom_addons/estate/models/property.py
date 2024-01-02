@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+
 
 class Property(models.Model):
     _name = "estate.property"
@@ -29,3 +30,10 @@ class Property(models.Model):
         'property_id',
         string='Offers',
     )
+    best_offer = fields.Float("Best Offer")
+    total_area = fields.Integer("Total Area (sqm)", compute="_compute_total_area")
+
+    @api.depends('living_area', 'garden_area')
+    def _compute_total_area(self):
+        for property_record in self:
+            property_record.total_area = property_record.living_area + property_record.garden_area
