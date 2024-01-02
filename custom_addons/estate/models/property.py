@@ -42,3 +42,13 @@ class Property(models.Model):
     def _compute_best_offer(self):
         for property_record in self:
             property_record.best_offer = sum(property_record.offer_ids.mapped("price"))
+
+    
+    @api.onchange("garden")
+    def _ochange_garden(self):
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = "north"
+        else:
+            self.garden_area = False
+            self.garden_orientation = False
