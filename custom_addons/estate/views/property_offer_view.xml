@@ -5,7 +5,7 @@
         <record id="action_estate_property_offer_tree" model="ir.actions.act_window">
             <field name="name">Property Offer</field>
             <field name="res_model">estate.property.offer</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree</field>
         </record>
 
         <!-- Action for Form View -->
@@ -16,7 +16,7 @@
         </record>
 
         <!-- Menu items linking to the actions -->
-        <menuitem id="menu_estate_property_offer_tree" name="Property Offer" parent="menu_estate_property_settings" action="action_estate_property_offer_tree"/>
+        <menuitem id="menu_estate_property_offer_tree" name="Property Offers" parent="menu_estate_property_settings" action="action_estate_property_offer_tree"/>
 
         <!-- Tree View -->
         <record id="view_tree_property_offer" model="ir.ui.view">
@@ -27,6 +27,8 @@
                     <field name="price"/>
                     <field name="status"/>
                     <field name="partner_id"/>
+                    <field name="validity"/>
+                    <field name="deadline"/>
                 </tree>
             </field>
         </record>
@@ -43,6 +45,8 @@
                                 <field name="price"/>
                                 <field name="status"/>
                                 <field name="partner_id"/>
+                                <field name="validity"/>
+                                <field name="deadline"/>
                             </group>
                         </group>
                     </sheet>
