@@ -48,6 +48,10 @@ class Property(models.Model):
         ('positive_selling_price', 'CHECK(selling_price > 0)', 'Selling price must be strictly positive.')
     ]
 
+    _sql_constraints = [
+        ('positive_best_offer', 'CHECK(best_offer > 0)', 'Best offer price must be strictly positive.')
+    ]
+
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
