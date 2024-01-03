@@ -39,4 +39,13 @@ class PropertyOffer(models.Model):
         for offer in self:
             if offer.validity:
                 offer.deadline = fields.Date.today() + timedelta(days=offer.validity)
+    
+    def action_accepted(self):
+        for offer in self:
+            offer.write({'status': 'accepted'})
+            offer.property_id.selling_price = offer.property_id.best_offer
+            offer.property_id.buyer_id = offer.partner_id
 
+    def action_refused(self):
+        for offer in self:
+            offer.write({'status': 'refused'})
