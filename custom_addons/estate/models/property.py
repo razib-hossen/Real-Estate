@@ -12,7 +12,7 @@ class Property(models.Model):
     postcode = fields.Char("Postcode")
     date_availability = fields.Date("Available From")
     expected_price = fields.Float("Expected Price", required=True)
-    selling_price = fields.Float("Selling Price")
+    selling_price = fields.Float("Selling Price", required=True)
     bedrooms = fields.Integer("Bedrooms")
     living_area = fields.Integer("Living Area (sqm)")
     facades = fields.Integer("Facades")
@@ -42,6 +42,10 @@ class Property(models.Model):
 
     _sql_constraints = [
         ('positive_expected_price', 'CHECK(expected_price > 0)', 'Expected price must be strictly positive.'),
+    ]
+
+    _sql_constraints = [
+        ('positive_selling_price', 'CHECK(selling_price > 0)', 'Selling price must be strictly positive.')
     ]
 
 
