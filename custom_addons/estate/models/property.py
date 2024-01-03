@@ -39,6 +39,12 @@ class Property(models.Model):
         readonly=True,
     )
 
+
+    _sql_constraints = [
+        ('positive_expected_price', 'CHECK(expected_price > 0)', 'Expected price must be strictly positive.'),
+    ]
+
+
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
         for property_record in self:
