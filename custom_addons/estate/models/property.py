@@ -45,11 +45,11 @@ class Property(models.Model):
     ]
 
     _sql_constraints = [
-        ('positive_selling_price', 'CHECK(selling_price > 0)', 'Selling price must be strictly positive.')
+        ('positive_selling_price', 'CHECK(selling_price > 0)', 'Selling price must be strictly positive.'),
     ]
 
     _sql_constraints = [
-        ('positive_best_offer', 'CHECK(best_offer > 0)', 'Best offer price must be strictly positive.')
+        ('positive_best_offer', 'CHECK(best_offer > 0)', 'Best offer price must be strictly positive.'),
     ]
 
 
