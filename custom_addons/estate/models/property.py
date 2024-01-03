@@ -24,7 +24,7 @@ class Property(models.Model):
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')],
         help="Type is used to separate Leads and Opportunities")
     salesman_id = fields.Many2one('res.users', string='Salesman', index=True, default=lambda self: self.env.user)
-    buyer_id = fields.Many2one('res.users', string='Buyer')
+    buyer_id = fields.Many2one('res.partner', string='Buyer')
     offer_ids = fields.One2many(
         'estate.property.offer',
         'property_id',
@@ -59,11 +59,6 @@ class Property(models.Model):
             self.garden_area = False
             self.garden_orientation = False
 
-    def action_do_something(self):
-        for record in self:
-            record.name = "Something"
-        return True
-
 
     def button_cancel(self):
         for record in self:
@@ -76,4 +71,4 @@ class Property(models.Model):
         for record in self:
             if record.state == 'canceled':
                 raise exceptions.UserError("A canceled property cannot be sold.")
-            record.write({'state': 'solde'})
+            record.write({'state': 'sold'})
