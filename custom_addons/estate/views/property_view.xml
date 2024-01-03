@@ -21,7 +21,7 @@
         <!-- Menu for the Estate Property -->
         <menuitem id="menu_estate_property" name="Advertisements" sequence="10" parent="menu_estate"/>
         <!-- Menu for the Estate Property -->
-        <menuitem id="menu_estate_property_settings" name="Settings" sequence="10" parent="menu_estate"/>
+        <menuitem id="menu_estate_property_settings" name="Settings" sequence="11" parent="menu_estate"/>
 
         <!-- Menu items linking to the actions -->
         <menuitem id="menu_estate_property_form" name="Properties" parent="menu_estate_property" action="action_estate_property_form"/>
@@ -89,8 +89,8 @@
                             <group>
                                 <field name="date_availability"/>
                                 <field name="expected_price"/>
-                                <field name="selling_price"/>
                                 <field name="best_offer" />
+                                <field name="selling_price"/>
                             </group>
                             <notebook>
                                 <page string="Description">
