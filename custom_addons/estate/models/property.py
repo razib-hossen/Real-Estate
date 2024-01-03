@@ -1,4 +1,5 @@
 from odoo import models, fields, api, exceptions
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 
 class Property(models.Model):
@@ -86,3 +87,15 @@ class Property(models.Model):
             if record.state == 'canceled':
                 raise exceptions.UserError("A canceled property cannot be sold.")
             record.write({'state': 'sold'})
+    
+
+    @api.constrains('expected_price', 'selling_price')
+    def _check_selling_price(self):
+        for property_record in self:
+            if float_is_zero(property_record.expected_price, precision_digits=2):
+                # If expected price is zero, skip the check
+                continue
+
+            lower_limit = property_record.expected_price * 0.9
+            if float_compare(property_record.selling_price, lower_limit, precision_digits=2) == -1:
+                raise exceptions.ValidationError("Selling price cannot be lower than 90% of the expected price.")
