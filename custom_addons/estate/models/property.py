@@ -49,11 +49,6 @@ class Property(models.Model):
         ('positive_selling_price', 'CHECK(selling_price > 0)', 'Selling price must be strictly positive.'),
     ]
 
-    _sql_constraints = [
-        ('positive_best_offer', 'CHECK(best_offer > 0)', 'Best offer price must be strictly positive.'),
-    ]
-
-
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
         for property_record in self:
@@ -99,3 +94,11 @@ class Property(models.Model):
             lower_limit = property_record.expected_price * 0.9
             if float_compare(property_record.selling_price, lower_limit, precision_digits=2) == -1:
                 raise exceptions.ValidationError("Selling price cannot be lower than 90% of the expected price.")
+    
+
+    @api.constrains('best_offer')
+    def _check_best_offer(self):
+        for record in self:
+            if record.best_offer <= 0:
+                raise exceptions.ValidationError("Best offer price must be positive.")
+        
