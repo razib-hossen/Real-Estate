@@ -293,3 +293,44 @@ After adding the access rights, restart the Odoo server:
 ./odoo/odoo-bin -c conf/local.conf
 ```
 
+
+# Chapter 6: Finally, Some UI To Play With
+
+In this chapter, we will enhance the Real Estate Property model by adding a state field with specific configurations.
+
+## Exercise: Add State Field
+
+### Step 1: Update the `estate.property` Model
+
+Edit the `estate_property.py` file to add the state field to the `EstateProperty` model:
+
+```python
+# /ERP-17/custom_addons/estate/models/estate_property.py
+
+from odoo import fields, models
+
+class EstateProperty(models.Model):
+    _name = 'estate.property'
+    _description = 'Real Estate Property'
+
+    .........
+    .........
+    
+    state = fields.Selection(
+        [('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'),
+         ('sold', 'Sold'), ('canceled', 'Canceled')],
+        string='State',
+        required=True,
+        default='new',
+        copy=False,
+    )
+```
+
+### Step 2: Restart the Server
+
+After adding the state field, restart the Odoo server:
+
+```bash
+./odoo/odoo-bin -c conf/local.conf
+```
+
