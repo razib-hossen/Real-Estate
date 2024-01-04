@@ -18,4 +18,9 @@
     'demo': [
 
     ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'icon': '/estate/static/description/icon1.png',
+    'license': 'LGPL-3',
 }
