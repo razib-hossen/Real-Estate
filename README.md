@@ -590,3 +590,23 @@ Follow similar steps to add the Real Estate Property Tag table:
 3. Add logic in the `estate.property.offer` model to handle the "Accept" and "Refuse" buttons. Include logic for setting the buyer and selling price when an offer is accepted.
 4. Ensure that a canceled property cannot be set as sold, and a sold property cannot be canceled.
 5. Ensure that only one offer can be accepted for a given property.
+
+
+# Chapter 11: Constraints
+
+### Feature List:
+
+1. **SQL Constraints:**
+   - Property Model:
+     - Ensure that the expected price is strictly positive.
+     - Ensure that the selling price is positive.
+   - Offer Model:
+     - Ensure that the offer price is strictly positive.
+   - Property Tag Model and Property Type Model:
+     - Ensure that the name for both is unique.
+
+2. **Python Constraint:**
+   - Property Model:
+     - Implement a constraint to ensure that the selling price cannot be lower than 90% of the expected price.
+     - Take into account that the selling price is zero until an offer is validated.
+     - Utilize `float_compare()` and `float_is_zero()` methods from `odoo.tools.float_utils` when working with floats.
