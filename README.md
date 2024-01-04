@@ -233,3 +233,63 @@ After making these changes, restart the server with the following command:
 ./odoo/odoo-bin -c conf/local.conf -u estate
 ```
 
+
+# Chapter 5: Security - A Brief Introduction
+
+In this chapter, we will introduce security concepts in Odoo and provide a brief exercise on adding access rights to the Real Estate Property model.
+
+## 5.1 Understanding Access Rights
+
+Access rights in Odoo are defined as records of the model `ir.model.access`. Each access right is associated with a model, a group (or no group for global access), and a set of permissions: create, read, write, and unlink.
+
+For our Real Estate Property model, we will define access rights in a CSV file named `ir.model.access.csv`. This file will specify the permissions granted to a specific group (in this case, `base.group_user`).
+
+## 5.2 Exercise: Add Access Rights
+
+### Step 1: Create `ir.model.access.csv` File
+
+Create the `ir.model.access.csv` file in the appropriate folder (`security` folder in this case) with the following content:
+
+```csv
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_estate_property,access_estate_property,model_estate_property,base.group_user,1,1,1,1
+```
+
+### Step 2: Reference in `__manifest__.py`
+
+Now, reference the `ir.model.access.csv` file in the `data` section of your `__manifest__.py` file:
+
+```python
+# /ERP-17/custom_addons/estate/__manifest__.py
+
+{
+    'name': 'Real Estate',
+    'version': '1.0',
+    'depends': ['base'],
+    'author': 'Rajib Mahmud',
+    'category': 'Services',
+    'description': """
+    The Real Estate Advertisement module.
+    """,
+    'data': [
+        'security/ir.model.access.csv',
+        'views/property_view.xml',
+        'views/property_type_view.xml',
+        'views/property_tag_view.xml',
+        'views/property_offer_view.xml',
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}
+```
+
+### Step 3: Restart the Server
+
+After adding the access rights, restart the Odoo server:
+
+```bash
+./odoo/odoo-bin -c conf/local.conf
+```
+
