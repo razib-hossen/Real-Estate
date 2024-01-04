@@ -556,3 +556,26 @@ Follow similar steps to add the Real Estate Property Tag table:
 2. Update the `__init__.py` file to import the new Python file.
 3. Update the `__manifest__.py` file to include the new model in the `data` section.
 4. Create the form and tree views for the `estate.property.tag
+
+
+# Chapter 9: Computed Fields And Onchanges
+
+**Feature List:**
+
+1. **Total Area Computation:**
+   - Computed `total_area` in the `estate.property` model based on `living_area` and `garden_area`.
+
+2. **Best Offer Calculation:**
+   - Introduced `best_offer` in the `estate.property` model, computed from the total sum of `price` in related offers.
+
+3. **Onchange for Garden Field:**
+   - Implemented `_onchange_garden` to set/clear values for `garden_area` and `garden_orientation` based on the `garden` field.
+
+4. **Computed Offer Validity and Deadline:**
+   - Added computed fields `validity` and `deadline` in the `estate.property.offer` model.
+
+5. **Onchange for Offer Deadline:**
+   - Implemented `_onchange_deadline` to update `validity` when `deadline` changes.
+
+6. **Onchange for Offer Validity:**
+   - Added `_onchange_validity` to update `deadline` when `validity` changes.
