@@ -110,7 +110,7 @@ Edit `local.conf` to set the database connection parameters, addons path, and ot
 You can now run Odoo using the following command:
 
 ```bash
-./odoo/odoo-bin -c odoo.conf
+./odoo/odoo-bin -c conf/local.conf
 ```
 
 Visit `http://localhost:8069` in your web browser to access the Odoo instance.
@@ -161,7 +161,7 @@ This `__manifest__.py` file provides essential information about your module, in
 Restart the Odoo server to apply the changes you made:
 
 ```bash
-./odoo/odoo-bin -c odoo.conf
+./odoo/odoo-bin -c conf/local.conf
 ```
 
 ## 3.3 Update Apps List
