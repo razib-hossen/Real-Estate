@@ -579,3 +579,14 @@ Follow similar steps to add the Real Estate Property Tag table:
 
 6. **Onchange for Offer Validity:**
    - Added `_onchange_validity` to update `deadline` when `validity` changes.
+
+
+# Chapter 10: Ready For Some Action?
+
+**Feature List:**
+
+1. Added buttons "Accept" and "Refuse" to the form view of the `estate.property.offer` model.
+2. Implement logic in the `estate.property` model to handle the "SOLD" and "CANCEL" buttons.
+3. Add logic in the `estate.property.offer` model to handle the "Accept" and "Refuse" buttons. Include logic for setting the buyer and selling price when an offer is accepted.
+4. Ensure that a canceled property cannot be set as sold, and a sold property cannot be canceled.
+5. Ensure that only one offer can be accepted for a given property.
