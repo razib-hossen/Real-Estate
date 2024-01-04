@@ -334,3 +334,43 @@ After adding the state field, restart the Odoo server:
 ./odoo/odoo-bin -c conf/local.conf
 ```
 
+
+# Chapter 7: Basic Views
+
+In this chapter, we'll add custom views to enhance the user interface of the Real Estate Property module.
+
+## Exercise: Add a Custom Search View
+
+Follow a similar process to create a custom search view. Create a new XML file named `property_view.xml` in the `views` folder and define the search view.
+
+## Exercise: Add Filter and Group By
+
+Edit the `property_view.xml` file to add the required filter and group by functionalities:
+
+```xml
+<!-- /ERP-17/custom_addons/estate/views/property_view.xml -->
+
+<record id="view_estate_property_search" model="ir.ui.view">
+    <field name="name">estate.property.search</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="name"/>
+            <field name="state" filter_domain="[('state', 'in', ['new', 'offer_received'])]"/>
+            <filter name="group_by_postcode" string="Group by Postcode" context="{'group_by': 'postcode'}"/>
+            <!-- Add other fields as needed -->
+        </search>
+    </field>
+</record>
+```
+
+Reference this search view in the `__manifest__.py` file under the `data` section.
+
+### Step 4: Restart the Server
+
+After adding the views, restart the Odoo server:
+
+```bash
+./odoo/odoo-bin -c conf/local.conf
+```
+
