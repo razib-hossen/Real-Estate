@@ -189,3 +189,47 @@ To make your module appear when the 'Apps' filter is applied, add the appropriat
 
 The `'application': True` key designates your module as an application, making it visible under the 'Apps' filter.
 
+
+# Chapter 4: Models and Basic Fields
+
+In this chapter, we will define the Real Estate Properties model and add basic fields to the `estate.property` table. Follow the exercises to create the necessary files and implement the required model attributes.
+
+## 4.1 Define the Real Estate Properties Model
+
+Create the appropriate files and folders for the `estate.property` model. Based on the example in the CRM module, add a minimum definition for the `estate.property` model.
+
+Edit the `property.py` file to include these fields:
+
+```python
+# /ERP-17/custom_addons/estate/models/estate_property.py
+
+from odoo import fields, models
+
+class EstateProperty(models.Model):
+    _name = 'estate.property'
+    _description = 'Real Estate Property'
+
+    name = fields.Char(string='Property Name')
+    description = fields.Text(string='Description')
+    postcode = fields.Char(string='Postcode')
+    date_availability = fields.Date(string='Date Availability')
+    expected_price = fields.Float(string='Expected Price')
+    selling_price = fields.Float(string='Selling Price')
+    bedrooms = fields.Integer(string='Bedrooms')
+    living_area = fields.Integer(string='Living Area')
+    facades = fields.Integer(string='Facades')
+    garage = fields.Boolean(string='Garage')
+    garden = fields.Boolean(string='Garden')
+    garden_area = fields.Integer(string='Garden Area')
+    garden_orientation = fields.Selection(
+        [('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')],
+        string='Garden Orientation',
+    )
+```
+
+After making these changes, restart the server with the following command:
+
+```bash
+./odoo/odoo-bin -c conf/local.conf -u estate
+```
+
