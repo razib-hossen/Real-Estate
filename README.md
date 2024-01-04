@@ -374,3 +374,185 @@ After adding the views, restart the Odoo server:
 ./odoo/odoo-bin -c conf/local.conf
 ```
 
+
+# Chapter 8: Relations Between Models
+
+In this chapter, we will establish relationships between models in the Real Estate module by adding the Real Estate Property Type, Buyer, Salesperson, Property Tag, and Property Offer tables.
+
+## Exercise: Add the Real Estate Property Type Table
+
+### Step 1: Create the `estate.property.type` Model
+
+Create a new Python file named `property_type.py` inside the `models` folder:
+
+```bash
+touch /ERP-17/custom_addons/estate/models/property_type.py
+```
+
+Edit `estate_property_type.py` and define the `estate.property.type` model:
+
+```python
+# /ERP-17/custom_addons/estate/models/estate_property_type.py
+
+from odoo import fields, models
+
+class EstatePropertyType(models.Model):
+    _name = 'estate.property.type'
+    _description = 'Real Estate Property Type'
+
+    name = fields.Char(string='Property Type', required=True)
+```
+
+### Step 2: Update `__init__.py`
+
+Make sure to import the new Python file in the `__init__.py` file:
+
+```python
+# /ERP-17/custom_addons/estate/models/__init__.py
+
+from . import estate_property
+from . import property_type  # Add this line
+```
+
+### Step 3: Update `__manifest__.py`
+
+Add the new model to the `data` section in the `__manifest__.py` file:
+
+```python
+# /ERP-17/custom_addons/estate/__manifest__.py
+
+{
+    'name': 'Real Estate',
+    'version': '1.0',
+    'depends': ['base'],
+    'author': 'Rajib Mahmud',
+    'category': 'Services',
+    'description': """
+    The Real Estate Advertisement module.
+    """,
+    'data': [
+        'security/ir.model.access.csv',
+        'views/property_view.xml',
+        'views/property_type_view.xml',
+        'views/property_tag_view.xml',
+        'views/property_offer_view.xml',
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}
+```
+
+### Step 4: Create the Form and Tree Views
+
+Create the form and tree views for the `estate.property.type` model in XML files inside the `views` folder.
+
+`estate_property_type_form_view.xml`:
+
+```xml
+<!-- /ERP-17/custom_addons/estate/views/estate_property_type_form_view.xml -->
+
+<record id="view_estate_property_type_form" model="ir.ui.view">
+    <field name="name">estate.property.type.form</field>
+    <field name="model">estate.property.type</field>
+    <field name="arch" type="xml">
+        <form>
+            <group>
+                <field name="name"/>
+            </group>
+        </form>
+    </field>
+</record>
+```
+
+`estate_property_type_tree_view.xml`:
+
+```xml
+<!-- /ERP-17/custom_addons/estate/views/estate_property_type_tree_view.xml -->
+
+<record id="view_estate_property_type_tree" model="ir.ui.view">
+    <field name="name">estate.property.type.tree</field>
+    <field name="model">estate.property.type</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+        </tree>
+    </field>
+</record>
+```
+
+### Step 5: Restart the Server
+
+Restart the Odoo server:
+
+```bash
+./odoo-bin -c odoo.conf
+```
+
+## Exercise: Add Buyer and Salesperson
+
+### Step 1: Update the `estate.property` Model
+
+Edit the `estate_property.py` file and add the `buyer_id` and `salesperson_id` fields:
+
+```python
+# /ERP-17/custom_addons/estate/models/estate_property.py
+
+from odoo import fields, models
+
+class EstateProperty(models.Model):
+    _name = 'estate.property'
+    _description = 'Real Estate Property'
+
+    .......
+    .......
+
+    buyer_id = fields.Many2one('res.partner', string='Buyer', copy=False)
+    salesperson_id = fields.Many2one('res.users', string='Salesperson', default=lambda self: self.env.user.id)
+```
+
+### Step 2: Update the `estate_property` Form View
+
+Edit the `estate_property_form_view.xml` file to include the new fields:
+
+```xml
+<!-- /ERP-17/custom_addons/estate/views/estate_property_form_view.xml -->
+
+<record id="view_estate_property_form" model="ir.ui.view">
+    <field name="name">estate.property.form</field>
+    <field name="model">estate.property</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <!-- Existing fields -->
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="state"/>
+                    <!-- New fields -->
+                    <field name="buyer_id"/>
+                    <field name="salesperson_id"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+```
+
+### Step 3: Restart the Server
+
+Restart the Odoo server:
+
+```bash
+./odoo/odoo-bin -c conf/local.conf
+```
+
+## Exercise: Add the Real Estate Property Tag Table
+
+Follow similar steps to add the Real Estate Property Tag table:
+
+1. Create the `estate.property.tag` model with the `name` field.
+2. Update the `__init__.py` file to import the new Python file.
+3. Update the `__manifest__.py` file to include the new model in the `data` section.
+4. Create the form and tree views for the `estate.property.tag
