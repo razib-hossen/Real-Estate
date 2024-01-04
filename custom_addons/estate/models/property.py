@@ -1,4 +1,5 @@
 from odoo import models, fields, api, exceptions
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 
 class Property(models.Model):
@@ -12,7 +13,7 @@ class Property(models.Model):
     postcode = fields.Char("Postcode")
     date_availability = fields.Date("Available From")
     expected_price = fields.Float("Expected Price", required=True)
-    selling_price = fields.Float("Selling Price")
+    selling_price = fields.Float("Selling Price", required=True)
     bedrooms = fields.Integer("Bedrooms")
     living_area = fields.Integer("Living Area (sqm)")
     facades = fields.Integer("Facades")
@@ -38,6 +39,15 @@ class Property(models.Model):
         default='new',
         readonly=True,
     )
+
+
+    _sql_constraints = [
+        ('positive_expected_price', 'CHECK(expected_price > 0)', 'Expected price must be strictly positive.'),
+    ]
+
+    _sql_constraints = [
+        ('positive_selling_price', 'CHECK(selling_price > 0)', 'Selling price must be strictly positive.'),
+    ]
 
     @api.depends('living_area', 'garden_area')
     def _compute_total_area(self):
@@ -72,3 +82,23 @@ class Property(models.Model):
             if record.state == 'canceled':
                 raise exceptions.UserError("A canceled property cannot be sold.")
             record.write({'state': 'sold'})
+    
+
+    @api.constrains('expected_price', 'selling_price')
+    def _check_selling_price(self):
+        for property_record in self:
+            if float_is_zero(property_record.expected_price, precision_digits=2):
+                # If expected price is zero, skip the check
+                continue
+
+            lower_limit = property_record.expected_price * 0.9
+            if float_compare(property_record.selling_price, lower_limit, precision_digits=2) == -1:
+                raise exceptions.ValidationError("Selling price cannot be lower than 90% of the expected price.")
+    
+
+    @api.constrains('best_offer')
+    def _check_best_offer(self):
+        for record in self:
+            if record.best_offer <= 0:
+                raise exceptions.ValidationError("Best offer price must be positive.")
+        
