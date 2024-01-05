@@ -1,9 +1,7 @@
-# ERP-17: Getting started
+# Real Estate
 ---
 
 # Chapter 1: Architecture Overview
-
-Welcome to the Odoo 17 Development Getting Started Guide! This chapter provides an overview of the architecture of Odoo, offering insights into its structure and components.
 
 ## 1.1 Architecture Components Interaction
 
