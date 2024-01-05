@@ -45,14 +45,14 @@ Before you start setting up your development environment, make sure you have the
 
 - **Git:** Version control is essential for collaborative development. Install Git to manage your source code.
 
-## 2.2 Clone The ERP-17 Repository To Your Project Folder
+## 2.2 Clone The Real-Estate Repository To Your Project Folder
 
 ```bash
-# Clone the ERP-17 project
-git clone https://github.com/razib-hossen/ERP-17.git
+# Clone the Real-Estate project
+git clone https://github.com/razib-hossen/Real-Estate.git
 
-# Enter the ERP-17 project folder
-cd ERP-17
+# Enter the Real-Estate project folder
+cd Real-Estate
 ```
 
 ## 2.2 Virtual Environment
@@ -123,7 +123,7 @@ In this chapter, we will guide you through the process of creating a new Odoo mo
 Open the `__manifest__.py` file in a text editor and define the name of your module and its dependencies. For now, the only required dependency is the `base` module. Ensure that the `__manifest__.py` file looks like this:
 
 ```python
-# /ERP-17/custom_addons/estate/__manifest__.py
+# /Real-Estate/estate/__manifest__.py
 
 {
     'name': 'Real Estate',
@@ -175,7 +175,7 @@ Your module should appear in the list. If it doesn't, try removing the default '
 To make your module appear when the 'Apps' filter is applied, add the appropriate key to the `__manifest__.py` file. Update the file as follows:
 
 ```python
-# /ERP-17/custom_addons/estate/__manifest__.py
+# /Real-Estate/estate/__manifest__.py
 
 {
     ...
@@ -199,7 +199,7 @@ Create the appropriate files and folders for the `estate.property` model. Based 
 Edit the `property.py` file to include these fields:
 
 ```python
-# /ERP-17/custom_addons/estate/models/estate_property.py
+# /Real-Estate/estate/models/property.py
 
 from odoo import fields, models
 
@@ -258,7 +258,7 @@ access_estate_property,access_estate_property,model_estate_property,base.group_u
 Now, reference the `ir.model.access.csv` file in the `data` section of your `__manifest__.py` file:
 
 ```python
-# /ERP-17/custom_addons/estate/__manifest__.py
+# /Real-Estate/estate/__manifest__.py
 
 {
     'name': 'Real Estate',
@@ -303,7 +303,7 @@ In this chapter, we will enhance the Real Estate Property model by adding a stat
 Edit the `estate_property.py` file to add the state field to the `EstateProperty` model:
 
 ```python
-# /ERP-17/custom_addons/estate/models/estate_property.py
+# /Real-Estate/estate/models/property.py
 
 from odoo import fields, models
 
@@ -346,7 +346,7 @@ Follow a similar process to create a custom search view. Create a new XML file n
 Edit the `property_view.xml` file to add the required filter and group by functionalities:
 
 ```xml
-<!-- /ERP-17/custom_addons/estate/views/property_view.xml -->
+<!-- /Real-Estate/estate/views/property_view.xml -->
 
 <record id="view_estate_property_search" model="ir.ui.view">
     <field name="name">estate.property.search</field>
@@ -384,13 +384,13 @@ In this chapter, we will establish relationships between models in the Real Esta
 Create a new Python file named `property_type.py` inside the `models` folder:
 
 ```bash
-touch /ERP-17/custom_addons/estate/models/property_type.py
+touch /Real-Estate/estate/models/property_type.py
 ```
 
-Edit `estate_property_type.py` and define the `estate.property.type` model:
+Edit `property_type.py` and define the `estate.property.type` model:
 
 ```python
-# /ERP-17/custom_addons/estate/models/estate_property_type.py
+# /Real-Estate/estate/models/property_type.py
 
 from odoo import fields, models
 
@@ -406,7 +406,7 @@ class EstatePropertyType(models.Model):
 Make sure to import the new Python file in the `__init__.py` file:
 
 ```python
-# /ERP-17/custom_addons/estate/models/__init__.py
+# /Real-Estate/estate/models/__init__.py
 
 from . import estate_property
 from . import property_type  # Add this line
@@ -417,7 +417,7 @@ from . import property_type  # Add this line
 Add the new model to the `data` section in the `__manifest__.py` file:
 
 ```python
-# /ERP-17/custom_addons/estate/__manifest__.py
+# /Real-Estate/estate/__manifest__.py
 
 {
     'name': 'Real Estate',
@@ -449,7 +449,7 @@ Create the form and tree views for the `estate.property.type` model in XML files
 `estate_property_type_form_view.xml`:
 
 ```xml
-<!-- /ERP-17/custom_addons/estate/views/estate_property_type_form_view.xml -->
+<!-- /Real-Estate/estate/views/property_type_view.xml -->
 
 <record id="view_estate_property_type_form" model="ir.ui.view">
     <field name="name">estate.property.type.form</field>
@@ -467,7 +467,7 @@ Create the form and tree views for the `estate.property.type` model in XML files
 `estate_property_type_tree_view.xml`:
 
 ```xml
-<!-- /ERP-17/custom_addons/estate/views/estate_property_type_tree_view.xml -->
+<!-- /Real-Estate/estate/views/property_type_view.xml -->
 
 <record id="view_estate_property_type_tree" model="ir.ui.view">
     <field name="name">estate.property.type.tree</field>
@@ -485,17 +485,17 @@ Create the form and tree views for the `estate.property.type` model in XML files
 Restart the Odoo server:
 
 ```bash
-./odoo-bin -c odoo.conf
+./odoo/odoo-bin -c conf/local.conf
 ```
 
 ## Exercise: Add Buyer and Salesperson
 
 ### Step 1: Update the `estate.property` Model
 
-Edit the `estate_property.py` file and add the `buyer_id` and `salesperson_id` fields:
+Edit the `property.py` file and add the `buyer_id` and `salesperson_id` fields:
 
 ```python
-# /ERP-17/custom_addons/estate/models/estate_property.py
+# /Real-Estate/estate/models/property.py
 
 from odoo import fields, models
 
@@ -515,7 +515,7 @@ class EstateProperty(models.Model):
 Edit the `estate_property_form_view.xml` file to include the new fields:
 
 ```xml
-<!-- /ERP-17/custom_addons/estate/views/estate_property_form_view.xml -->
+<!-- /Real-Estate/estate/views/property_view.xml -->
 
 <record id="view_estate_property_form" model="ir.ui.view">
     <field name="name">estate.property.form</field>
