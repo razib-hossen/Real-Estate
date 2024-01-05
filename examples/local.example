@@ -8,5 +8,5 @@ db_user = test_user
 db_password = test_pass
 dbfilter = False
 db_list = True
-addons_path = /FullPath/ERP-17/odoo/addons,/FullPath/ERP-17/odoo/odoo/addons,/FullPath/ERP-17/custom_addons,
+addons_path = /FullPath/Real-Estate/odoo/addons,/FullPath/Real-Estate/odoo/odoo/addons,/FullPath/Real-Estate/estate,
 http_port = 8069
