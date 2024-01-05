@@ -113,3 +113,6 @@ dmypy.json
 
 # Jupyter Notebook
 .ipynb_checkpoints
+
+# odoo 
+odoo
