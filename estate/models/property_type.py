@@ -7,6 +7,10 @@ class PropertyType(models.Model):
 
     name = fields.Char("Name")
 
+    property_ids = fields.One2many(
+        'estate.property', 'property_type_id', string="Properties"
+    )
+
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name already created'),
     ]
