@@ -2,18 +2,32 @@
     <data>
 
         <!-- Action for Form View -->
-        <record id="action_estate_property_type_form" model="ir.actions.act_window">
+        <record id="action_estate_property_type" model="ir.actions.act_window">
             <field name="name">Property Types</field>
             <field name="res_model">estate.property.type</field>
-            <field name="view_mode">form</field>
+            <field name="view_mode">tree,form</field>
         </record>
 
 
         <!-- Menu items linking to the actions -->
-        <menuitem id="menu_estate_property_type_form" name="Property Types" parent="menu_estate_property_settings" action="action_estate_property_type_form"/>
+        <menuitem id="menu_estate_property_type_form" name="Property Types" parent="menu_estate_property_settings" action="action_estate_property_type"/>
+
+        <!-- Tree View -->
+        <record id="view_form_property_type_tree" model="ir.ui.view">
+            <field name="name">estate.property.type.tree</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <form string="Peoperty Types">
+                    <tree>
+                        <field name="sequence" widget="handle"/>
+                        <field name="name"/>
+                    </tree>
+                </form>
+            </field>
+        </record>
 
         <!-- Form View -->
-        <record id="view_form_property_type" model="ir.ui.view">
+        <record id="view_form_property_type_form" model="ir.ui.view">
             <field name="name">estate.property.type.form</field>
             <field name="model">estate.property.type</field>
             <field name="arch" type="xml">
