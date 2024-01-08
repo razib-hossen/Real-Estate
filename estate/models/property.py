@@ -35,7 +35,7 @@ class Property(models.Model):
     total_area = fields.Integer("Total Area (sqm)", compute="_compute_total_area")
     state = fields.Selection(
         string='Status',
-        selection=[('new', 'New'), ('canceled', 'Canceled'), ('sold', 'Sold')],
+        selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'), ('canceled', 'Canceled'), ('sold', 'Sold')],
         default='new',
         readonly=True,
     )
