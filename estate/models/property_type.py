@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api, exceptions
 
 
 class PropertyType(models.Model):
@@ -16,3 +16,10 @@ class PropertyType(models.Model):
     _sql_constraints = [
         ('unique_name', 'unique(name)', 'The name already created'),
     ]
+
+
+    @api.constrains('name')
+    def _check_name(self):
+        for record in self:
+            if not record.name:
+                raise exceptions.ValidationError("This field is required.")
