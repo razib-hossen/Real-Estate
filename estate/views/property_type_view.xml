@@ -5,7 +5,7 @@
         <record id="action_estate_property_type_tree" model="ir.actions.act_window">
             <field name="name">Property Types</field>
             <field name="res_model">estate.property.type</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,kanban</field>
         </record>
 
         <!-- Menu items linking to the actions -->
@@ -20,6 +20,23 @@
                     <field name="sequence" widget="handle"/>
                     <field name="name"/>
                 </tree>
+            </field>
+        </record>
+
+        <!-- Kanban View -->
+        <record id="view_kanban_property_type" model="ir.ui.view">
+            <field name="name">estate.property.type.kanban</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                        <div>
+                            <field name="name"/>
+                        </div>
+                        </t>
+                    </templates>
+                </kanban>
             </field>
         </record>
 
