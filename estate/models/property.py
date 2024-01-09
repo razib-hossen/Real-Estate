@@ -5,10 +5,11 @@ from odoo.tools.float_utils import float_compare, float_is_zero
 class Property(models.Model):
     _name = "estate.property"
     _description = "The Real Estate Advertisement module."
+    _order = "id desc"
 
     name = fields.Char("Title", required=True, translate=True)
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
-    tag_ids = fields.Many2many("estate.property.tag", string="Tags")
+    tag_ids = fields.One2many('estate.property.tag', 'property_id', string="Tags")
     description = fields.Text("Description", )
     postcode = fields.Char("Postcode")
     date_availability = fields.Date("Available From")
@@ -35,7 +36,7 @@ class Property(models.Model):
     total_area = fields.Integer("Total Area (sqm)", compute="_compute_total_area")
     state = fields.Selection(
         string='Status',
-        selection=[('new', 'New'), ('canceled', 'Canceled'), ('sold', 'Sold')],
+        selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'), ('canceled', 'Canceled'), ('sold', 'Sold')],
         default='new',
         readonly=True,
     )

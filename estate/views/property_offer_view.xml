@@ -8,13 +8,6 @@
             <field name="view_mode">tree</field>
         </record>
 
-        <!-- Action for Form View -->
-        <record id="action_estate_property_offer_form" model="ir.actions.act_window">
-            <field name="name">Property Offer</field>
-            <field name="res_model">estate.property.offer</field>
-            <field name="view_mode">form</field>
-        </record>
-
         <!-- Menu items linking to the actions -->
         <menuitem id="menu_estate_property_offer_tree" name="Property Offers" parent="menu_estate_property_settings" action="action_estate_property_offer_tree"/>
 
