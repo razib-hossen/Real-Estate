@@ -40,12 +40,20 @@ class PropertyOffer(models.Model):
         for offer in self:
             if offer.validity:
                 offer.deadline = fields.Date.today() + timedelta(days=offer.validity)
+
+    is_offer_accepted = fields.Boolean(compute="_is_offer_accepted")
+    
+    @api.depends('property_id.state')
+    def _is_offer_accepted(self):
+        for record in self:
+            record.is_offer_accepted = record.property_id.state == 'offer_accepted'
     
     def action_accepted(self):
         for offer in self:
             offer.write({'status': 'accepted'})
             offer.property_id.selling_price = offer.property_id.best_offer
             offer.property_id.buyer_id = offer.partner_id
+            offer.property_id.write({'state': 'offer_accepted'})
 
     def action_refused(self):
         for offer in self:
