@@ -16,14 +16,15 @@
             <field name="name">estate.property.offer.tree</field>
             <field name="model">estate.property.offer</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree decoration-success="status == 'accepted'" decoration-danger="status == 'refused'"> 
                     <field name="price"/>
                     <field name="partner_id"/>
                     <field name="validity"/>
                     <field name="deadline"/>
-                    <button name="action_accepted" string="Accepted" type="object" icon="fa-check"/>
-                    <button name="action_refused" string="Refused" type="object" icon="fa-times"/>
+                    <button name="action_accepted" string="Accepted" type="object" icon="fa-check" invisible="is_offer_accepted"/>
+                    <button name="action_refused" string="Refused" type="object" icon="fa-times" invisible="is_offer_accepted"/>
                     <field name="status"/>
+                    <field name="is_offer_accepted" nolabel="1" invisible="True"/>
                 </tree>
             </field>
         </record>
