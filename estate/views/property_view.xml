@@ -52,8 +52,9 @@
                     <field name="name"/>
                     <field name="description"/>
                     <field name="property_type_id"/>
+                    <field name="tag_ids" widget="many2many_tags"/>
                     <field name="postcode"/>
-                    <field name="date_availability"/>
+                    <field name="date_availability" optional="hide"/>
                     <field name="expected_price"/>
                     <field name="selling_price"/>
                     <field name="bedrooms"/>
@@ -85,7 +86,7 @@
                                 <field name="name"/>
                                 <field name="state" />
                                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                                <field name="property_type_id"/>
+                                <field name="property_type_id" options="{'no_create': true, 'no_open': true}"/>
                             </group>
                             <group>
                                 <field name="date_availability"/>
@@ -103,14 +104,14 @@
                                         <field name="garage"/>
                                         <field name="garden"/>
                                         <field name="living_area"/>
-                                        <field name="garden_area"/>
-                                        <field name="garden_orientation"/>
+                                        <field name="garden_area" invisible="not garden"/>
+                                        <field name="garden_orientation" string="Garden Orientation" invisible="not garden"/>
                                         <field name="total_area"/>
                                     </group>
                                 </page>
                                 <page string="Offer">
                                     <group>
-                                        <field name="offer_ids"/>
+                                        <field name="offer_ids" options="{'no_create_edit': [('state', 'in', ['offer_accepted', 'sold', 'canceled'])]}"/>
                                     </group>
                                 </page>
                                 <page string="Other Info">
