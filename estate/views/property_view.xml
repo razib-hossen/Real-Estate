@@ -37,7 +37,7 @@
                     <field name="bedrooms" string="Bedrooms"/>
                     <field name="expected_price" string="Expected price"/>
                     <field name="selling_price" string="Selling Price"/>
-                    <field name="living_area" string="Living Area" filter_domain="[('living_area', '>=', 10)]"/>
+                    <field name="state" string="Sold Property" filter_domain="[('state', '=', 'sold')]"/>
                     <filter name="filter_available" string="Available" domain="[('name', 'ilike', 'Available')]"/>
                 </search>
             </field>
@@ -112,7 +112,7 @@
                                 </page>
                                 <page string="Offer">
                                     <group>
-                                        <field name="offer_ids" options="{'no_create_edit': [('state', 'in', ['offer_accepted', 'sold', 'canceled'])]}"/>
+                                        <field name="offer_ids"/>
                                     </group>
                                 </page>
                                 <page string="Other Info">

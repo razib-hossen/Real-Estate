@@ -6,6 +6,7 @@
             <field name="name">Property Offer</field>
             <field name="res_model">estate.property.offer</field>
             <field name="view_mode">tree</field>
+            <field name="domain">[('property_type_id', '=', active_id)]</field>
         </record>
 
         <!-- Menu items linking to the actions -->
@@ -16,7 +17,7 @@
             <field name="name">estate.property.offer.tree</field>
             <field name="model">estate.property.offer</field>
             <field name="arch" type="xml">
-                <tree decoration-success="status == 'accepted'" decoration-danger="status == 'refused'"> 
+                <tree decoration-success="status == 'accepted'" decoration-danger="status == 'refused'" editable="bottom"> 
                     <field name="price"/>
                     <field name="partner_id"/>
                     <field name="validity"/>

@@ -101,3 +101,14 @@ class Property(models.Model):
             if record.best_offer <= 0:
                 raise exceptions.ValidationError("Best offer price must be positive.")
         
+
+
+class EstateProperty(models.Model):
+    _inherit = "estate.property"
+
+    @api.ondelete(at_uninstall=False)
+    def _prevent_delete_non_new_canceled(self):
+        for record in self:
+            if record.state not in ('new', 'canceled'):
+                raise exceptions.UserError("You cannot delete a property that is not in 'New' or 'Canceled' state.")
+
