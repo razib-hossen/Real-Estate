@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 from datetime import timedelta
 
 
@@ -13,9 +13,15 @@ class PropertyOffer(models.Model):
         selection=[('refused', "Refused"), ('accepted', "Accepted")],
         help="Please select an option")
     partner_id = fields.Many2one("res.partner", string="Partner")
-    property_id = fields.Many2one("estate.property", required=True)
+    property_id = fields.Many2one("estate.property", required=True, ondelete="cascade")
     validity = fields.Integer("Validity (days)", compute='_compute_validity', inverse='_inverse_validity', store=True)
     deadline = fields.Date("Deadline", compute='_compute_deadline', inverse='_inverse_deadline', store=True)
+    property_type_id = fields.Many2one(
+        "estate.property.type",
+        string="Property Type",
+        related="property_id.property_type_id",
+        store=True,
+    )
 
     @api.depends('validity')
     def _compute_deadline(self):
@@ -62,3 +68,4 @@ class PropertyOffer(models.Model):
     def action_refused(self):
         for offer in self:
             offer.write({'status': 'refused'})
+
