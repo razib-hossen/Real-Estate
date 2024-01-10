@@ -1,4 +1,4 @@
-from odoo import models, fields, api, exceptions
+from odoo import models, fields
 
 
 class PropertyType(models.Model):
@@ -6,7 +6,7 @@ class PropertyType(models.Model):
     _description = "The Property Type Model"
     _order = "sequence, name"
 
-    name = fields.Char("Name")
+    name = fields.Char("Name", required=True)
 
     property_ids = fields.One2many(
         'estate.property', 'property_type_id', string="Properties"
@@ -17,9 +17,3 @@ class PropertyType(models.Model):
         ('unique_name', 'unique(name)', 'The name already created'),
     ]
 
-
-    @api.constrains('name')
-    def _check_name(self):
-        for record in self:
-            if not record.name:
-                raise exceptions.ValidationError("This field is required.")

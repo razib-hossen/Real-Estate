@@ -46,7 +46,11 @@ class PropertyOffer(models.Model):
     @api.depends('property_id.state')
     def _is_offer_accepted(self):
         for record in self:
-            record.is_offer_accepted = record.property_id.state == 'offer_accepted'
+            record.is_offer_accepted = (
+                record.property_id.state == 'offer_accepted'\
+                    or record.property_id.state == 'canceled'\
+                        or record.property_id.state == 'sold'
+                )
     
     def action_accepted(self):
         for offer in self:
