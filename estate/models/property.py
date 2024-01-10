@@ -93,7 +93,7 @@ class Property(models.Model):
             lower_limit = property_record.expected_price * 0.9
             if float_compare(property_record.selling_price, lower_limit, precision_digits=2) == -1:
                 raise exceptions.ValidationError("Selling price cannot be lower than 90% of the expected price.")
-    
+
 
     @api.constrains('best_offer')
     def _check_best_offer(self):

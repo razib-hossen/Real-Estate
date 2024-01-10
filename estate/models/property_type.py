@@ -33,7 +33,8 @@ class PropertyType(models.Model):
     def _compute_offer_count(self):
         for record in self:
             record.offer_count = len(record.offer_ids)
-    
+
+
     def action_view_property_type_offers(self):
         action = self.env.ref("estate.action_estate_property_offer_tree").read()[0]
         action['domain'] = [('property_type_id', '=', self.id)]
