@@ -60,10 +60,20 @@ class PropertyOffer(models.Model):
     
     @api.model
     def create(self, values):
-        offer = super(PropertyOffer, self).create(values)
-        record = offer.property_id
+        new_offer = super(PropertyOffer, self).create(values)
+
+        # Check if there are existing offers with a higher price
+        existing_offers = self.env['estate.property.offer'].search([
+            ('property_id', '=', new_offer.property_id.id),
+            ('price', '>', new_offer.price)
+        ])
+
+        if existing_offers:
+            raise exceptions.UserError("Cannot create offer with a lower price than existing offers.")
+
+        record = new_offer.property_id
         record.write({'state': 'offer_received'})
-        return offer
+        return new_offer
 
     def action_accepted(self):
         for offer in self:
