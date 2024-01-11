@@ -1,6 +1,9 @@
 from odoo import models, fields, api, exceptions
 from datetime import timedelta
+import pdb
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 
 class PropertyOffer(models.Model):
     _name = "estate.property.offer"
@@ -60,7 +63,12 @@ class PropertyOffer(models.Model):
     
     @api.model
     def create(self, values):
+        # pdb.set_trace()
         new_offer = super(PropertyOffer, self).create(values)
+
+        # logging.info(values, "values --")
+        # logging.info(type(self), "type self")
+
 
         # Check if there are existing offers with a higher price
         existing_offers = self.env['estate.property.offer'].search([
