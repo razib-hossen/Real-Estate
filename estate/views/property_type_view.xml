@@ -32,6 +32,7 @@
                     <templates>
                         <t t-name="kanban-box">
                         <div>
+                            <field name="sequence" widget="handle"/>
                             <field name="name"/>
                         </div>
                         </t>

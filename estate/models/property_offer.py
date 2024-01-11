@@ -58,6 +58,13 @@ class PropertyOffer(models.Model):
                         or record.property_id.state == 'sold'
                 )
     
+    @api.model
+    def create(self, values):
+        offer = super(PropertyOffer, self).create(values)
+        record = offer.property_id
+        record.write({'state': 'offer_received'})
+        return offer
+
     def action_accepted(self):
         for offer in self:
             offer.write({'status': 'accepted'})
