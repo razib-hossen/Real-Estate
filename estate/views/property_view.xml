@@ -38,6 +38,8 @@
                     <field name="expected_price" string="Expected price"/>
                     <field name="selling_price" string="Selling Price"/>
                     <field name="state" string="Sold Property" filter_domain="[('state', '=', 'sold')]"/>
+                    <field name="description" string="Name and Description" filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"/>
+                    <field name="living_area" string="Living Area" filter_domain="[('living_area', '>=', self)]"/>
                     <filter name="filter_available" string="Available" domain="[('name', 'ilike', 'Available')]"/>
                 </search>
             </field>
