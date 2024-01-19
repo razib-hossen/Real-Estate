@@ -1,6 +1,5 @@
 from odoo import models, fields, api, exceptions
 from datetime import timedelta
-import pdb
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
@@ -61,27 +60,25 @@ class PropertyOffer(models.Model):
                         or record.property_id.state == 'sold'
                 )
     
-    @api.model
-    def create(self, values):
-        # pdb.set_trace()
-        new_offer = super(PropertyOffer, self).create(values)
+    @api.model_create_multi
+    def create(self, values_list):
+        for values in values_list:
+            # Check if there are existing offers with a higher price
+            existing_offers = self.search([
+                ('property_id', '=', values.get('property_id')),
+                ('price', '>', values.get('price'))
+            ])
 
-        # logging.info(values, "values --")
-        # logging.info(type(self), "type self")
+            if existing_offers:
+                raise exceptions.UserError("Cannot create offer with a lower price than existing offers.")
 
+        new_offers = super(PropertyOffer, self).create(values_list)
 
-        # Check if there are existing offers with a higher price
-        existing_offers = self.env['estate.property.offer'].search([
-            ('property_id', '=', new_offer.property_id.id),
-            ('price', '>', new_offer.price)
-        ])
+        for new_offer in new_offers:
+            record = new_offer.property_id
+            record.write({'state': 'offer_received'})
 
-        if existing_offers:
-            raise exceptions.UserError("Cannot create offer with a lower price than existing offers.")
-
-        record = new_offer.property_id
-        record.write({'state': 'offer_received'})
-        return new_offer
+        return new_offers
 
     def action_accepted(self):
         for offer in self:
