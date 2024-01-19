@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.DEBUG)
 class PropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "The Property Offer Model"
-    _order = "price desc"
+    _order = "price"
 
     price = fields.Float("Price")
     status = fields.Selection(
@@ -79,6 +79,7 @@ class PropertyOffer(models.Model):
             record.write({'state': 'offer_received'})
 
         return new_offers
+
 
     def action_accepted(self):
         for offer in self:

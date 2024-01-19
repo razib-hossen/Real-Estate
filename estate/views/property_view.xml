@@ -9,6 +9,7 @@
             <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
             <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_filter_available': 1, 'default_garage': True}</field>
         </record>
 
         <!-- Action for Form View -->
@@ -38,7 +39,8 @@
                     <field name="expected_price" string="Expected price"/>
                     <field name="selling_price" string="Selling Price"/>
                     <field name="state" string="Sold Property" filter_domain="[('state', '=', 'sold')]"/>
-                    <field name="description" string="Name and Description" filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"/>
+                    <field name="description" filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"/>
+
                     <field name="living_area" string="Living Area" filter_domain="[('living_area', '>=', self)]"/>
                     <filter name="filter_available" string="Available" domain="[('name', 'ilike', 'Available')]"/>
                 </search>
@@ -100,7 +102,7 @@
                             <notebook>
                                 <page string="Description">
                                     <group>
-                                        <field name="description"/>
+                                        <field name="description" default="The description is"/>
                                         <field name="postcode"/>
                                         <field name="bedrooms"/>
                                         <field name="facades"/>

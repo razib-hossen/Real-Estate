@@ -30,7 +30,7 @@ class Property(models.Model):
     offer_ids = fields.One2many(
         'estate.property.offer',
         'property_id',
-        string='Offers',
+        # string='Offers',
     )
     best_offer = fields.Float("Best Offer", compute="_compute_best_offer", store=True)
     total_area = fields.Integer("Total Area (sqm)", compute="_compute_total_area")
