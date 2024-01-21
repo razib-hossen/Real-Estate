@@ -8,7 +8,7 @@
         <record id="action_estate_property_tree" model="ir.actions.act_window">
             <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,kanban</field>
             <field name="context">{'search_default_filter_available': 1, 'default_garage': True}</field>
         </record>
 
@@ -17,6 +17,13 @@
             <field name="name">Properties</field>
             <field name="res_model">estate.property</field>
             <field name="view_mode">form</field>
+        </record>
+
+        <!-- Action for Kanban View -->
+        <record id="action_estate_property_kanban" model="ir.actions.act_window">
+            <field name="name">Properties</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">kanban</field>
         </record>
 
         <!-- Menu for the Estate Property -->
@@ -70,6 +77,50 @@
                     <field name="garden_area"/>
                     <field name="garden_orientation"/>
                 </tree>
+            </field>
+        </record>
+
+
+         <!-- Source Kanban View -->
+        <record id="view_kanban_property" model="ir.ui.view">
+            <field name="name">estate.property.kanban</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" create="0" sample="1">
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings row">
+                                            <div class="col-4">
+                                                <h3 class="o_kanban_record_title">
+                                                    <field name="name"/>
+                                                </h3>
+                                            </div>
+                                            <div class="col-8 text-end">
+                                                <div>
+                                                <field name="best_offer"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_record_body mt-3">
+                                        <div class="text-end" style="display: flex;justify-content: flex-end;">
+                                            <div style="background: #82d182 !important;">
+                                                <button style="color: white !important;" name="action_sold" type="object" string="SOLD"/>
+                                            </div>
+                                            <div style="background: #ff8585 !important;">
+                                                <button style="color: white !important;" name="action_cancel" type="object" string="CANCEL"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
             </field>
         </record>
 
