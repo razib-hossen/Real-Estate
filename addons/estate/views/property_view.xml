@@ -2,7 +2,7 @@
     <data>
 
         <!-- Define the Parent Menu -->
-        <menuitem id="menu_estate" name="Real Estate" sequence="5" action="action_estate_property_tree"/>
+        <menuitem id="menu_estate" name="Real Estate" sequence="5"/>
 
         <!-- Action for Tree View -->
         <record id="action_estate_property_tree" model="ir.actions.act_window">
@@ -25,7 +25,7 @@
         <menuitem id="menu_estate_property_settings" name="Settings" sequence="11" parent="menu_estate"/>
 
         <!-- Menu items linking to the actions -->
-        <menuitem id="menu_estate_property_form" name="Properties" parent="menu_estate_property" action="action_estate_property_form"/>
+        <menuitem id="menu_estate_property_form" name="Properties" parent="menu_estate_property" action="action_estate_property_tree"/>
 
         <!-- Search View -->
         <record id="view_search_property" model="ir.ui.view">
@@ -80,8 +80,8 @@
             <field name="arch" type="xml">
                 <form string="Test">
                     <header>
-                        <button class="oe_highlight" name="button_sold" type="object" string="SOLD"/>
-                        <button class="oe_highlight" name="button_cancel" type="object" string="CANCEL"/>
+                        <button class="oe_highlight" name="action_sold" type="object" string="SOLD"/>
+                        <button class="oe_highlight" name="action_cancel" type="object" string="CANCEL"/>
                         <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold" />
                     </header>
 

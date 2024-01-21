@@ -69,14 +69,14 @@ class Property(models.Model):
             self.garden_orientation = False
 
 
-    def button_cancel(self):
+    def action_cancel(self):
         for record in self:
             if record.state == 'sold':
                 raise exceptions.UserError("A sold property cannot be calceled.")
             record.write({'state': 'canceled'})
 
 
-    def button_sold(self):
+    def action_sold(self):
         for record in self:
             if record.state == 'canceled':
                 raise exceptions.UserError("A canceled property cannot be sold.")
