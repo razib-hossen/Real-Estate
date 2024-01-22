@@ -1,4 +1,4 @@
-from odoo import models, api
+from odoo import models
 
 
 class EstateProperty(models.Model):
@@ -22,7 +22,7 @@ class EstateProperty(models.Model):
             line_data_1 = {
                 'name': '6% of selling price',
                 'quantity': 1,
-                'price_unit': 0.06 * record.best_offer,
+                'price_unit': 0.06 * record.selling_price,
             }
 
             line_data_2 = {
@@ -33,7 +33,7 @@ class EstateProperty(models.Model):
 
             new_invoice.write({'invoice_line_ids': [(0, 0, line_data_1), (0, 0, line_data_2)]})
 
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
 
             result = super(EstateProperty, record).action_sold()
 
