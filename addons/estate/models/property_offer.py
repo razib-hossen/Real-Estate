@@ -66,11 +66,12 @@ class PropertyOffer(models.Model):
             # Check if there are existing offers with a higher price
             existing_offers = self.search([
                 ('property_id', '=', values.get('property_id')),
-                ('price', '>', values.get('price'))
             ])
 
             if existing_offers:
-                raise exceptions.UserError("Cannot create offer with a lower price than existing offers.")
+                existing_min_price = min(existing_offers.mapped('price'))
+                if existing_min_price > values.get('price'):
+                    raise exceptions.UserError("Cannot create offer with a lower price than existing offers.")
 
         new_offers = super(PropertyOffer, self).create(values_list)
 
