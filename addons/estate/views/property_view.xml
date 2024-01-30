@@ -157,8 +157,8 @@
                                         <field name="postcode"/>
                                         <field name="bedrooms"/>
                                         <field name="facades"/>
-                                        <field name="garage"/>
-                                        <field name="garden"/>
+                                        <field name="garage" widget="boolean_toggle"/>
+                                        <field name="garden" widget="boolean_toggle"/>
                                         <field name="living_area"/>
                                         <field name="garden_area" invisible="not garden"/>
                                         <field name="garden_orientation" string="Garden Orientation" invisible="not garden"/>
