@@ -17,7 +17,8 @@
             <field name="name">estate.property.offer.tree</field>
             <field name="model">estate.property.offer</field>
             <field name="arch" type="xml">
-                <tree decoration-success="status == 'accepted'" decoration-danger="status == 'refused'" editable="bottom"> 
+                <!-- Tree View -->
+                <tree decoration-success="status == 'accepted'" decoration-danger="status == 'refused'" editable="bottom">
                     <field name="price"/>
                     <field name="partner_id"/>
                     <field name="validity"/>
@@ -26,9 +27,13 @@
                     <button name="action_refused" string="Refused" type="object" icon="fa-times" invisible="is_offer_accepted"/>
                     <field name="status"/>
                     <field name="is_offer_accepted" nolabel="1" invisible="True"/>
+                    
+                    <!-- Custom Delete Button -->
+                    <button class="o_list_record_remove text-center" icon="fa-trash-o" confirm="Are you sure you want to delete this offer?" type="object" name="unlink"/>
                 </tree>
             </field>
         </record>
+
 
         <!-- Form View -->
         <record id="view_form_property_offer" model="ir.ui.view">
